@@ -1,18 +1,11 @@
 function twoSum(nums: number[], target: number): number[] {
-  let output: number[] = [];
-  let f: boolean = false;
-
-  nums.map((num, idx) => {
-    if (f) return;
-    nums.map((n, i) => {
-      if (i === idx || f) return;
-      if (num + n === target) {
-        f = true;
-        output.push(idx, i);
-        return;
-      }
-    });
-  });
-
-  return output;
+    const h: { [key: number]: number } = {};
+    for (let i = 0; i < nums.length; i++) {
+        const c = target - nums[i];
+        if (c in h) {
+            return [h[c], i];
+        }
+        h[nums[i]] = i;
+    }
+    return [];
 }
