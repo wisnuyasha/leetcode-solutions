@@ -3,51 +3,25 @@
  * @return {number}
  */
 var romanToInt = function (s) {
-  let arr = s.split("");
-  arr.reverse();
-  let h = {};
+  const h = {
+    "I": 1,
+    "V": 5,
+    "X": 10,
+    "L": 50,
+    "C": 100,
+    "D": 500,
+    "M": 1000
+  };
 
-  arr.map((s, i) => {
-    if (s === "I") {
-      if (h[i - 1] === 5) {
-        h[i] = 4;
-        h[i - 1] = 0;
-      } else if (h[i - 1] === 10) {
-        h[i] = 9;
-        h[i - 1] = 0;
-      } else {
-        h[i] = 1;
-      }
-    } else if (s === "V") {
-      h[i] = 5;
-    } else if (s === "X") {
-      if (h[i - 1] === 50) {
-        h[i] = 40;
-        h[i - 1] = 0;
-      } else if (h[i - 1] === 100) {
-        h[i] = 90;
-        h[i - 1] = 0;
-      } else {
-        h[i] = 10;
-      }
-    } else if (s === "L") {
-      h[i] = 50;
-    } else if (s === "C") {
-      if (h[i - 1] === 500) {
-        h[i] = 400;
-        h[i - 1] = 0;
-      } else if (h[i - 1] === 1000) {
-        h[i] = 900;
-        h[i - 1] = 0;
-      } else {
-        h[i] = 100;
-      }
-    } else if (s === "D") {
-      h[i] = 500;
+  let val = 0;
+
+  for (let i = 0; i < s.length; i++) {
+    if (i === 0 || h[s[i]] <= h[s[i - 1]]) {
+      val += h[s[i]];
     } else {
-      h[i] = 1000;
+      val += h[s[i]] - h[s[i - 1]] * 2;
     }
-  });
+  }
 
-  return Object.values(h).reduce((acc, cur) => acc + cur);
+  return val;
 };
