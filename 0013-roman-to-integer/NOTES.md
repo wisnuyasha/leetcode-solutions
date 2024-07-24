@@ -119,11 +119,11 @@ Time complexity for this solution is `O(N)`, because it only need to iterate thr
 
 ## Lesson Learned
 
-1. Use FOR loops
+1. Use FOR loops :
 Using `for` loops can make the code more readable and following the best practices
 
-2. Understand the problem carefully
+2. Understand the problem carefully :
 Almost all of my mistakes and time wasted were because i didnt really understand the problem. With a better understanding, i would be able to solve the problem more efficiently.
 
-3. Optimize space usage
+3. Optimize space usage : 
 In my first attempt, i used a hashmap to store values and an reversed array, and others. This resulted in a lot of unnecessary memory and reduced performance. Instead, try to store values in variables and think of solution that minimize space usage.
