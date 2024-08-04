@@ -8,8 +8,10 @@ var moveZeroes = function(nums) {
     for(let i = 0; i < nums.length; i++) {
         let currNum = nums[i]
         if(nums[i] !== 0) {
-            nums[i] = nums[j]
-            nums[j] = currNum
+            if(i !== j) {
+                nums[i] = nums[j]
+                nums[j] = currNum
+            }
             j++
         }
     }
