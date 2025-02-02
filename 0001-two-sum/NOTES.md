@@ -5,19 +5,13 @@ My first approach is to use brute force with nested loops, checking if the sum o
 ### Solution 1 : Brute Force
 ```js
 function twoSum(nums: number[], target: number): number[] {
-  let output: number[] = [];
 
-  nums.map((num, idx) => {
-    if (output.length !== 0) return;
-    nums.map((n, i) => {
-        if (i !== idx && num + n === target) {
-        output.push(idx, i);
-        return;
-      }
-    });
-  });
-
-  return output;
+  for(let i = 0; i < nums.length; i++) {
+    for(let j = i + 1; j < nums.length; j++) {
+      if(i === j) continue
+      if(nums[i] + nums[j] === target) return [i, j]
+    }
+  }
 }
 ```
 
@@ -41,6 +35,30 @@ function twoSum(nums: number[], target: number): number[] {
     return [];
 }
 ```
+
+### Bonus Solution : Sort + Two Pointer
+
+```js
+function twoSum(nums: number[], target: number): number[] {
+    nums.sort((a, b) => a - b)
+
+    let right = 0
+    let left = nums.length - 1
+
+    while(left < right) {
+      let sum = nums[left] + nums[right]
+      if(sum == target) return [nums[left], nums[right]]
+      else if(sum < target) left++
+      else if (sum > target) right++
+    }
+
+    return [];
+}
+```
+
+If the problem doesn't require an "index" and only asks for the values, then sort + two-pointer can be one of the solutions. After sorting the array, we can apply the two-pointer approach: if the sum of the left and right elements is smaller than the target, move the left pointer to the right; if it's larger, move the right pointer to the left. If the sum equals the target, then that's the answer!
+
+it has O(NlogN) space complexity and O(1) space complexity, making it more space-efficient than the previous hashmap solution, which requires O(N) space.
 
 ## Lesson Learned
 
