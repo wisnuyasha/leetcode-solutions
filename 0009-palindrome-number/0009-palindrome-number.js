@@ -3,16 +3,18 @@
  * @return {boolean}
  */
 var isPalindrome = function (x) {
-  const arr = Array.from(String(x));
-  const len = arr.length;
-  for (let i = 0; i < len; i++) {
-    if (i - (len - (i + 1)) <= 0) {
-      if (arr[i] === arr[len - (i + 1)]) {
-        continue
-      } else {
-        return false
-      }
-    }
+  if (x < 0 || (x % 10 === 0 && x !== 0)) return false;
+
+  let div = 1
+  while (div * 10 <= x) {
+    div *= 10
   }
+
+  while (x) {
+    if (Math.floor(x / div) !== x % 10) return false;
+    x = Math.floor((x % div) / 10)
+    div /= 100
+  }
+
   return true
-};
+}
