@@ -1,4 +1,4 @@
-# LeetCode Solutions
+# leetcode-solutions
 
 This repository contains **LeetCode** problem solutions using **JavaScript**. Each solution includes:
 - **Code implementation** that has been tested
