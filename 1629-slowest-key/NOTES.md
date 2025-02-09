@@ -1,0 +1,1 @@
+its similar to [Hackerrank Slowest Key Press](../hackerrank-slowest-key-press/NOTES.md) :D
