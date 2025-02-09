@@ -22,6 +22,19 @@ var missingNumber = function(nums) {
 
 The time complexity is O(N) (linear time) and the space complexity is O(1) (only constant space)
 
+
+### Bonus XOR Solution
+
+```js
+var missingNumber = function(nums) {
+    let xorResult = nums.length;
+    for(let i = 0; i < nums.length; i++) {
+        xorResult ^= i ^ nums[i];
+    }
+    return xorResult
+}
+```
+
 ## Lesson Learned
 
 - Understand the problem thoroughly to find the simplest and most efficient solution.
