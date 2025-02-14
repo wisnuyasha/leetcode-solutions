@@ -65,6 +65,8 @@ var isPalindrome = function (x) {
 
 This approach mainly uses modulo and division. The key logic is to extract the front and back digits, then shrink the number by removing them using modulo and division. It has a better time complexity of O(log N) because the number of digits decreases by two in each iteration, rather than iterating through all the digits one by one.
 
+## Illustration & Dry Run
+![Palindrome Number](https://github.com/user-attachments/assets/2b75b6df-76c4-4a56-bbe1-1a83650388ae)
 
 ## Lesson Learned
 
