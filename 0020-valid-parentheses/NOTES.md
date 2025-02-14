@@ -18,7 +18,7 @@ i used a stack approach to solve this, the idea is :
 
 To check the value, i used a constant hash to easily detect the type of bracket pairs.
 
-### Attempt Solution 1
+### Solution
 ```js
 var isValid = function(s) {
     let stack = []
@@ -43,6 +43,9 @@ var isValid = function(s) {
 ```
 
 The time complexity is O(N) (linear time) and the space complexity is O(N) (only constant space)
+
+## Illustration & Dry Run
+![Valid Parentheses](https://github.com/user-attachments/assets/324dd485-9949-4531-b2b7-45ce68ad0e76)
 
 ## Lesson Learned
 
