@@ -59,5 +59,8 @@ eventhough the time/space complexity are the same compared to the first solution
 
 actually theres a solution that has the best performance, called `KMP` (up to 34 ms runtime). but i believe it is out of this context and may not be applicable in real interview test.
 
+## Illustration & Dry Run
+![Index of the First Occurence](https://github.com/user-attachments/assets/e37df60c-a23a-42d4-8c6a-a7a9a491e577)
+
 ## Lesson Learned
 - it is crucial to consider the loops structure because it can improve the performance.
