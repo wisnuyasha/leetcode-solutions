@@ -29,6 +29,8 @@ var maxArea = function(height) {
 
 This solution has O(N) time complexity (traverse the array once) and O(1) space complexity (`biggestVol` is independent from input size)
 
+## Illustration & Dry Run
+![Container With Most Water](https://github.com/user-attachments/assets/a57f8892-8dc9-49a7-957a-338b85baff78)
 
 ## Lesson Learned
 
