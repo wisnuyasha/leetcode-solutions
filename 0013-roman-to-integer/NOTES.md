@@ -117,6 +117,11 @@ var romanToInt = function (s) {
 ```
 Time complexity for this solution is `O(N)`, because it only need to iterate through one loops. Space complexity is `O(1)`, because the hashmap for Roman numerals is fixed-size and it not depends on the input.
 
+## Illustration & Dry Run
+
+![Roman to Integer](https://github.com/user-attachments/assets/b92ed68b-d4bc-40ec-b7f0-0090577166e3)
+
+
 ## Lesson Learned
 
 1. Use FOR loops :
