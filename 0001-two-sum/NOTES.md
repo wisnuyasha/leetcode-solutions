@@ -60,6 +60,10 @@ If the problem doesn't require an "index" and only asks for the values, then sor
 
 it has O(NlogN) space complexity and O(1) space complexity, making it more space-efficient than the previous hashmap solution, which requires O(N) space.
 
+## Illustration & Dry Run
+
+![Two Sum](https://github.com/user-attachments/assets/108e1adb-0fe9-4b27-987d-020fd8813779)
+
 ## Lesson Learned
 
 - Time & Space Complexity :
