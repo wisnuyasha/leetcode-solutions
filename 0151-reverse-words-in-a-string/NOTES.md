@@ -34,6 +34,8 @@ var reverseWords = function(s) {
 
 This solution has O(N) time complexity (iterate thru `s` once) and O(N) space complexity (for the output array)
 
+## Illustration & Dry Run
+![Reverse Words in a String](https://github.com/user-attachments/assets/542fbd62-ece0-4a53-88b4-cbbceae626b8)
 
 ## Lesson Learned
 
