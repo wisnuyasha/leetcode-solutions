@@ -25,5 +25,8 @@ var twoSum = function(numbers, target) {
 
 This solution has O(N) time complexity (traverse the array once with two pointer) and O(1) space complexity (no extra space used)
 
+## Illustration & Dry Run
+![Two Sum II](https://github.com/user-attachments/assets/9fc35099-f363-4163-a2c5-1fed3ec79de7)
+
 ## Lesson Learned
 - improving my problem solving using two-pointer tech.
