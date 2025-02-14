@@ -30,6 +30,10 @@ var moveZeroes = function(nums) {
 
 The time complexity is O(N) (linear time) and the space complexity is O(1) (only constant space)
 
+## Illustration & Dry Run
+![Move Zeroes](https://github.com/user-attachments/assets/e85567ac-e386-435d-80fb-fd8bdffc9a2f)
+
+
 ## Lesson Learned
 
 - Two Pointer : 
