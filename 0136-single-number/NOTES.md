@@ -30,6 +30,9 @@ var singleNumber = function(nums) {
 
 The time complexity is O(N) (linear time) and the space complexity is O(1) (only constant space).
 
+### Illustration & Dry Run
+![Single Number](https://github.com/user-attachments/assets/57c9f82a-5072-4651-8a57-d4a8099dcbeb)
+
 ## Lesson Learned
 
 - XOR
