@@ -77,6 +77,10 @@ var maxProfit = function(prices) {
 
 The time complexity is O(N) (linear time) and the space complexity is O(1) (only constant space)
 
+## Illustration & Dry Run
+
+![Best Time To Buy and Sell Stocks](https://github.com/user-attachments/assets/606febbd-c776-41f9-9dba-62597add3752)
+
 ## Lesson Learned
 
 - This practice helped improve my logical thinking by forcing me to find alternative solutions.
