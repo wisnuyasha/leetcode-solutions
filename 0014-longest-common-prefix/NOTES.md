@@ -35,6 +35,9 @@ var longestCommonPrefix = function(strs) {
 ```
 The time complexity is `O(N * M)`, `N` is the tonumber of element in the array, and `M` is length of the string. The space complexity is `O(M)`, `M` is the length of the common prefix
 
+## Illustration & Dry Run
+![Longest Common Prefix](https://github.com/user-attachments/assets/1f3d0dc4-4cf4-4715-b0c9-2633c33eb0e7)
+
 After reading the discussion, i found a unique idea. sorting the array so that we can just compare the first and the last string. For example, `[flower, flow, light, low, flight]` when sorted becomes -> `[flight, flow, flower, light, low]`
 
 - the first and the last will always reveal the differeces in the prefix
