@@ -119,6 +119,10 @@ var findAnagrams = function(s, p) {
 
 this solution has O(N) time complexity (iterate once thru the `s` array without any nested loops or sort) and O(1) space complexity (only storing char frequencies (26 letter))
 
+## Illustration & Dry Run
+
+![Find All Anagrams in a String](https://github.com/user-attachments/assets/bb714160-578c-4989-853b-7c5db4f2a5d7)
+
 ## Lesson Learned
 
 - sliding window is often O(N), but incorrect usage can increase complexity.
