@@ -32,6 +32,9 @@ i found another unique solution, the idea is :
 - Instead of sorting, every word is represented as a character frequency array of size 26 (since there are only 26 alphabet).
 - Count the frequency of each character in O(M) and use this frequency array as a key to store anagrams in a hash table.
 
+## Illustration & Dry Run
+![Group Anagrams](https://github.com/user-attachments/assets/c112deb6-46e2-4c0f-b409-bfbc066adbcd)
+
 ## Bonus Solution 
 
 ```js
