@@ -29,6 +29,7 @@ this solution has O(N) time complexity (traverse all nodes in linked list) and O
 
 ## Illustration & Dry Run
 
+![Reverse Linked List](https://github.com/user-attachments/assets/6ad8a2d3-15c9-4b66-8372-cd03efb168c6)
 
 ## Lesson Learned
 
