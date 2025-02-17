@@ -10,13 +10,19 @@
  * @return {ListNode}
  */
 
-var reverseList = function(head) {
-    let prev = null;
-    let curr = head;
-    
-    while (curr) {
-        [curr.next, prev, curr] = [prev, curr, curr.next];
+var reverseList = function (head) {
+    let curr = head
+    let prev = null
+
+    while (curr !== null) {
+        // Store the next node of the current node (2 -> 5)
+        let next = curr.next;
+        // Reverse the direction of current.next to point to null (null <- 1)
+        curr.next = prev;
+        // Move prev to the current node (1)
+        prev = curr;
+        // Move curr to the next node (line 1)
+        curr = next;
     }
-    
-    return prev;
+    return prev
 };
