@@ -40,6 +40,7 @@ this solution has O(M + N) time complexity (traverse list1 and list2 until end) 
 
 ## Illustration & Dry Run
 
+![Merge Two Sorted Lists](https://github.com/user-attachments/assets/13651299-7e33-456b-9d32-817f359d8c8d)
 
 ## Lesson Learned
 
