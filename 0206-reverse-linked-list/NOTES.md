@@ -31,7 +31,7 @@ this solution has O(N) time complexity (traverse all nodes in linked list) and O
 
 ## Illustration & Dry Run
 
-![Reverse Linked List](https://github.com/user-attachments/assets/6ad8a2d3-15c9-4b66-8372-cd03efb168c6)
+![Reverse Linked List (iterative)](https://github.com/user-attachments/assets/515e2655-d397-49e2-bd4c-ba6e580f34f8)
 
 
 ## Recursive Solution
@@ -59,6 +59,8 @@ var reverseList = function(head) {
 this solution has a time complexity of O(N). technically, it performs 2N operations (one pass going down and one returning), but in bigO notation, constants are ignored, so it simplifies to O(N). space complexity is O(N) because each recursive call is stored in the call stack until the base case is reached. This makes the recursive approach less efficient than the iterative approach, which has O(1) space complexity.
 
 ## Illustration & Dry Run
+
+![Reverse Linked List (recursive)](https://github.com/user-attachments/assets/2bc985a8-4e70-4202-8387-7fc2df488abf)
 
 
 ## Lesson Learned
