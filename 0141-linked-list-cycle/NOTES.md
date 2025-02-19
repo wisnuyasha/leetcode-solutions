@@ -63,6 +63,7 @@ space complexity O(1) → only two pointers (slow and fast) are used, making thi
 
 ## Illustration & Dry Run
 
+![Linked List Cycle (floyd circle)](https://github.com/user-attachments/assets/7f840c9f-fcb9-416a-b3e3-1f260db43c4d)
 
 
 ## Lesson Learned
