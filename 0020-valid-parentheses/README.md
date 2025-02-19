@@ -1,37 +1,53 @@
-<h2><a href="https://leetcode.com/problems/valid-parentheses/">20. Valid Parentheses</a></h2><h3>Easy</h3><hr><div><p>Given a string <code>s</code> containing just the characters <code>'('</code>, <code>')'</code>, <code>'{'</code>, <code>'}'</code>, <code>'['</code> and <code>']'</code>, determine if the input string is valid.</p>
+## Analysis
 
-<p>An input string is valid if:</p>
+This problem requires :
+- Returning `true` if there is a matching pair of open-closed brackets (of the same type)
+- Returning `false` if the pair isnt the same type or isnt paired
 
-<ol>
-	<li>Open brackets must be closed by the same type of brackets.</li>
-	<li>Open brackets must be closed in the correct order.</li>
-	<li>Every close bracket has a corresponding open bracket of the same type.</li>
-</ol>
+## Thought process
 
-<p>&nbsp;</p>
-<p><strong class="example">Example 1:</strong></p>
+with the hint :
+> Use a stack of characters.
 
-<pre><strong>Input:</strong> s = "()"
-<strong>Output:</strong> true
-</pre>
+i used a stack approach to solve this, the idea is :
+- if its an open bracket, push it to the stack
+- if its an closed bracket :
+    - check if theres any value in stack. if there isnt, return `false` (if isnt empty, continue the iteration)
+    - check the value at the top of the stack with the curr value. if didnt match, return `false` (if true, just continue the iteration)
+- after the iteration, return `true` if the stack is empty (if theres any element left in stack, return `false` because it means an open bracket didnt have any pair)
 
-<p><strong class="example">Example 2:</strong></p>
+To check the value, i used a constant hash to easily detect the type of bracket pairs.
 
-<pre><strong>Input:</strong> s = "()[]{}"
-<strong>Output:</strong> true
-</pre>
+### Solution
+```js
+var isValid = function(s) {
+    let stack = []
+    const closing = {
+        '}': '{',
+        ']': '[',
+        ')': '('
+    }
+    
+    for(let char of s) {
+        if(char in closing) {
+            if(stack.length == 0 || stack.pop() !== closing[char]) {
+                return false
+            }
+        } else {
+            stack.push(char)
+        }
+    }
+    
+    return stack.length === 0
+};
+```
 
-<p><strong class="example">Example 3:</strong></p>
+The time complexity is O(N) (linear time) and the space complexity is O(N) (only constant space)
 
-<pre><strong>Input:</strong> s = "(]"
-<strong>Output:</strong> false
-</pre>
+## Illustration & Dry Run
+![Valid Parentheses](https://github.com/user-attachments/assets/324dd485-9949-4531-b2b7-45ce68ad0e76)
 
-<p>&nbsp;</p>
-<p><strong>Constraints:</strong></p>
+## Lesson Learned
 
-<ul>
-	<li><code>1 &lt;= s.length &lt;= 10<sup>4</sup></code></li>
-	<li><code>s</code> consists of parentheses only <code>'()[]{}'</code>.</li>
-</ul>
-</div>
+- Stack :
+stack reduce complex and unecesary conditions / loops. particularly in this case, stack provides a straightforward way to track and validate.

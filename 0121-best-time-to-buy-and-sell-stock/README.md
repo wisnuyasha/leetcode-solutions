@@ -1,30 +1,88 @@
-<h2><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/">121. Best Time to Buy and Sell Stock</a></h2><h3>Easy</h3><hr><div><p>You are given an array <code>prices</code> where <code>prices[i]</code> is the price of a given stock on the <code>i<sup>th</sup></code> day.</p>
+## Analysis
 
-<p>You want to maximize your profit by choosing a <strong>single day</strong> to buy one stock and choosing a <strong>different day in the future</strong> to sell that stock.</p>
+This problem requires :
+- Find the max value difference between `price[i + 1]` and `prices[i]`
+- Substracting with `price[i]` and `price[i - x]` is not allowed
 
-<p>Return <em>the maximum profit you can achieve from this transaction</em>. If you cannot achieve any profit, return <code>0</code>.</p>
+## Thought process
+My first approach was to use nested loops, this is the illustration since its easier to understand:
 
-<p>&nbsp;</p>
-<p><strong class="example">Example 1:</strong></p>
+```
+[7,1,5,3,6,4]
+ i j
 
-<pre><strong>Input:</strong> prices = [7,1,5,3,6,4]
-<strong>Output:</strong> 5
-<strong>Explanation:</strong> Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
-Note that buying on day 2 and selling on day 1 is not allowed because you must buy before you sell.
-</pre>
+...
 
-<p><strong class="example">Example 2:</strong></p>
+[7,1,5,3,6,4]
+ i         j
 
-<pre><strong>Input:</strong> prices = [7,6,4,3,1]
-<strong>Output:</strong> 0
-<strong>Explanation:</strong> In this case, no transactions are done and the max profit = 0.
-</pre>
+...
 
-<p>&nbsp;</p>
-<p><strong>Constraints:</strong></p>
+[7,1,5,3,6,4]
+   i j
 
-<ul>
-	<li><code>1 &lt;= prices.length &lt;= 10<sup>5</sup></code></li>
-	<li><code>0 &lt;= prices[i] &lt;= 10<sup>4</sup></code></li>
-</ul>
-</div>
+...
+
+[7,1,5,3,6,4]
+   i       j
+
+....
+```
+
+thats the idea, and:
+
+### Attempt Solution 1 : Two Pointer
+```js
+var maxProfit = function(prices) { 
+    let buy = 0
+    let biggest = 0
+    while(buy < (prices.length - 1)) {
+        let sell = buy + 1
+        while(sell < prices.length){
+            profit = prices[sell] - prices[buy]
+            if(prices[sell] > prices[buy] && profit > biggest){
+                biggest = profit
+            }
+            sell++
+        }
+        buy++
+    }
+    return biggest
+};
+```
+ 
+sadly, this has a time complexity of `O(N^2)` and did not pass the time limit. 
+    
+It took me a while to notice the core logic that maybe   lead to a solution. The idea is if the next next value is smaller, why not just replace it with the current value ? because there will no bigger solution either. So, `minPrice` is used to store the minimum price possible in the array. if the next value isnt smaller, just substract the value and compare/store the result to the `maxProfit`. With this approach, the code will run for O(N) or one iteration of the array.
+
+### Attempt Solution 2 :    
+```js
+var maxProfit = function(prices) {
+    let maxProfit = 0
+    let minPrice = prices[0]
+
+    for(let i = 0; i < prices.length; i++) {        
+        if(prices[i] < minPrice) minPrice = prices[i]
+        else {
+            let profit = prices[i] - minPrice
+            if(profit > maxProfit) {
+                maxProfit = profit
+            }
+        }
+    }
+
+    return maxProfit
+};
+```
+
+The time complexity is O(N) (linear time) and the space complexity is O(1) (only constant space)
+
+## Illustration & Dry Run
+
+![Best Time To Buy and Sell Stocks](https://github.com/user-attachments/assets/606febbd-c776-41f9-9dba-62597add3752)
+
+## Lesson Learned
+
+- This practice helped improve my logical thinking by forcing me to find alternative solutions.
+
+- It encouraged me to consider different time complexities, such as O(1), O(N), and higher, to determine if a higher time complexity is necessary.

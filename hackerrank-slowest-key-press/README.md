@@ -1,30 +1,75 @@
-<h2><a href="https://www.hackerrank.com/">Slowest Key Press</a></h2><hr><div>
-<p>Engineers have redesigned a keypad used by ambulance drivers in urban areas. In order to determine which key takes the longest time to press, the keypad is tested by a driver. Given the results of that test, determine which key takes the longest to press.</p>
-<h4>Example</h4>
-<pre>
-<code>keyTimes = [[0, 2], [1, 5], [0, 9], [2, 15]]</code>
-</pre>
-<p>Elements in <code>keyTimes[i][0]</code> represent encoded characters in the range <code>ascii[a-z]</code> where <code>a = 0, b = 1, ..., z = 25</code>. The second element, <code>keyTimes[i][1]</code> represents the time the key is pressed since the start of the test. The elements will be given in ascending time order. In the example, keys pressed, in order are <code>0102[encoded] = abac</code> at times <code>2, 5, 9, 15</code>. From the start time, it took <code>2 - 0 = 2</code> to press the first key, <code>5 - 2 = 3</code> to press the second, and so on. The longest time it took to press a key was key 2, or 'c', at <code>15 - 9 = 6</code>.
-</p>
-</div>
-<h4>Function Description</h4>
-<p>Complete the function <code>slowestKey</code> in the editor below.</p>
-<pre><code>slowestKey</code> has the following parameter(s):
-<pre>
-<ul>
-  <li><code>int keyTimes[n][2]</code>: the first column contains the encoded key pressed, the second contains the time at which it was pressed</li>
-</ul>
-</pre>
-</pre>
-<h4>Returns</h4>
-<ul>
-  <li><code>char</code>: the key that took the longest time to press</li>
-</ul>
-<h4>Constraints</h4>
-<ul>
-  <li><code>1 ≤ n ≤ 10^5</code></li>
-  <li><code>0 ≤ keyTimes[i][0] ≤ 25 (0 ≤ i &lt; n)</code></li>
-  <li><code>1 ≤ keyTimes[i][1] ≤ 10^8 (0 ≤ i &lt; n)</code></li>
-  <li>There will only be one key with the worst time.</li>
-  <li><code>keyTimes</code> is sorted in ascending order of <code>keyTimes[i][1]</code></li>
-</ul>
+## Analysis
+
+What the problem wants is :
+- To find the maximal (slowest) time in the array `keyTime[i][1]` at the second index = `y`, it can be determined by substracting the current and previous `y`.
+- To convert the `keytimes[i][0]` on first index, from an integer to an alphabet
+
+My first approach is to store the substraction between current and previous values in an array, and search the index of the largest item on the array. Then, i use that index to convert the value to anx alphabet. It passed all the test case, but..
+
+### Attempt Solution 1
+```js
+function slowestKey(keyTimes) {
+    const arr = [];
+    const char = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+    let biggestIndex = 0;
+
+    for(let i = 0; i < keyTimes.length; i++) {
+        let currArr = keyTimes[i];
+
+        if(i > 0) {
+            let prevArr = keyTimes[i - 1]
+            let total = currArr[1] - prevArr[1]
+            arr.push(total)
+        } else {
+            arr.push(currArr[1])
+        }
+    }
+
+    let max = arr[0]
+    for(let i = 0; i < keyTimes.length; i++) {
+        if(i > 0 && arr[i] > max) {
+            max = arr[i]
+            biggestIndex = i
+        }
+    }
+
+    let ans = keyTimes[biggestIndex]
+
+    return char[ans[0]]
+}
+```
+
+i realized that theres no need to add extra array for this. it not efficient because it uses extra storage (array) and extra time to loop for seaching the largest value. So, in the first loop, i added the logic to compare the largest value, and store the current (largest) index to `biggestIndex`. so that we get the largest index directly.
+
+### Attempt Solution 2
+```js
+function slowestKey(keyTimes) {
+    const char = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+    let biggestIndex = 0;
+
+    for(let i = 0; i < keyTimes.length; i++) {
+        if(i > 0) {
+            let total = keyTimes[i][1] - keyTimes[i - 1][1]
+
+            if(total > currMax) {
+                currMax = total
+                biggestIndex = i
+            }
+        } else { 
+            currMax = keyTimes[0][1]
+        }
+    }
+
+    return char[keyTimes[biggestIndex][0]]
+}
+```
+
+This function has a time complexity O(n) because it has one loops to iterate through `keyTimes` and a space complexity of O(1) because theres no storage that scales with the input.
+
+## Lesson Learned
+
+1. Array of array
+I learned how to access elements in an array of array (example: `arr = [[1,2][3,4]]`) with `arr[x][y]`.
+
+2. Unecessaary storage and logic
+I learned that in many cases, we dont need extra spaces to store some values. For example, in this problem, i initially stored the values in an array and had to do one more loop, which was really unecessary to find the largest value. this is not good for either time complexity (which would be O(2N)) or space complexity (which would be O(N)).

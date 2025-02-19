@@ -1,19 +1,66 @@
-<h2><a href="https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/">28. Find the Index of the First Occurrence in a String</a></h2><h3>Easy</h3><hr><div><p>Given two strings <code>needle</code> and <code>haystack</code>, return the index of the first occurrence of <code>needle</code> in <code>haystack</code>, or <code>-1</code> if <code>needle</code> is not part of <code>haystack</code>.</p>
+## Approach
 
-<p>&nbsp;</p>
-<p><strong class="example">Example 1:</strong></p>
-<pre><strong>Input:</strong> haystack = "sadbutsad", needle = "sad"
-<strong>Output:</strong> 0
-<strong>Explanation:</strong> "sad" occurs at index 0 and 6. The first occurrence is at index 0, so we return 0.
-</pre><p><strong class="example">Example 2:</strong></p>
-<pre><strong>Input:</strong> haystack = "leetcode", needle = "leeto"
-<strong>Output:</strong> -1
-<strong>Explanation:</strong> "leeto" did not occur in "leetcode", so we return -1.
-</pre>
-<p>&nbsp;</p>
-<p><strong>Constraints:</strong></p>
-<ul>
-	<li><code>1 &lt;= haystack.length, needle.length &lt;= 10<sup>4</sup></code></li>
-	<li><code>haystack</code> and <code>needle</code> consist of only lowercase English characters.</li>
-</ul>
-</div>
+This problem requires :
+- return index of the first occurrence of `needle` in `haystack`
+- return `-1` if `needle` is not in `haystack`
+
+My approach is to :
+- base case, if `haystack` is shorter than length, return `-1`
+- iterate thru `haystack` and compare it with `needle` to see if `needle` is found.
+
+### Solution 1 : Brute Force
+
+```js
+var strStr = function(haystack, needle) {
+    if(haystack.length < needle.length) return -1
+        
+    for(let i = 0; i < haystack.length; i++){
+        if(haystack[i] == needle[0]) {
+            for(let j = 0; j <= needle.length; j++){
+                if(j == needle.length) {
+                    return i
+                } else if(haystack[i + j] != needle[j]) {
+                    break
+                }
+            }
+        }
+    } 
+        
+    return -1
+};
+```
+
+This approach has an O(N*M) time complexity because of nested loops, and O(1) time complexity because theres no additional memory usage that depends on the inputs. 
+
+After reading the discussions, i realized that what can be improved from first solution :
+- loop should run up to `haylength - needle` length, ensuring that the loops is running until the index that `needle` still fits. (base case from solution 1 is implemented here too, if `needle` is longer, there will be no iteration)
+- using `while` loop in the nested iteration makes the code clearer and avoid unnecessary additional loops.
+
+### Solution 2 : Brute Force Improved
+
+
+```js
+var strStr = function(haystack, needle) {
+    if (needle === "") return 0;
+        
+    for (let i = 0; i <= haystack.length - needle.length; i++) {
+        let j = 0;
+        while (j < needle.length && haystack[i + j] === needle[j]) {
+            j++;
+        }
+        if (j == needle.length) return i;
+    }
+    
+    return -1;
+};
+```
+
+eventhough the time/space complexity are the same compared to the first solution, the improved code is more efficient because fewer iterations that performed. (improved from 60 ms to 53 ms runtime)
+
+actually theres a solution that has the best performance, called `KMP` (up to 34 ms runtime). but i believe it is out of this context and may not be applicable in real interview test.
+
+## Illustration & Dry Run
+![Index of the First Occurence](https://github.com/user-attachments/assets/e37df60c-a23a-42d4-8c6a-a7a9a491e577)
+
+## Lesson Learned
+- it is crucial to consider the loops structure because it can improve the performance.

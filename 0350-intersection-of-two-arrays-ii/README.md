@@ -1,33 +1,65 @@
-<h2><a href="https://leetcode.com/problems/intersection-of-two-arrays-ii/">350. Intersection of Two Arrays II</a></h2><h3>Easy</h3><hr><div><p>Given two integer arrays <code>nums1</code> and <code>nums2</code>, return <em>an array of their intersection</em>. Each element in the result must appear as many times as it shows in both arrays and you may return the result in <strong>any order</strong>.</p>
+## Analysis
 
-<p>&nbsp;</p>
-<p><strong class="example">Example 1:</strong></p>
+This problem requires :
+- return the common elements between 2 array (intersection)
+- result should be  unique and can be any order
+## Thought process
 
-<pre><strong>Input:</strong> nums1 = [1,2,2,1], nums2 = [2,2]
-<strong>Output:</strong> [2,2]
-</pre>
+My approach is to :
+- count the occurences of elements in the smaller arr (swap if necessary)
+- iterate thru the second array & collect elements that appear in the hashmap
 
-<p><strong class="example">Example 2:</strong></p>
+### Solution
 
-<pre><strong>Input:</strong> nums1 = [4,9,5], nums2 = [9,4,9,8,4]
-<strong>Output:</strong> [4,9]
-<strong>Explanation:</strong> [9,4] is also accepted.
-</pre>
+```js
+var intersect = function(nums1, nums2) {
+    if (nums1.length > nums2.length) return intersect(nums2, nums1);
 
-<p>&nbsp;</p>
-<p><strong>Constraints:</strong></p>
+    let h = {}
+    let arr = []
+    
+    for(let i = 0; i < nums1.length; i++){
+        h[nums1[i]] = (h[nums1[i]] || 0) + 1
+    }
+        
+    for(let j = 0; j < nums2.length; j++){
+        if(h[nums2[j]] > 0) {
+            arr.push(nums2[j])
+            h[nums2[j]] -= 1
+        }
+    }
+    
+    return arr
+};
+```
 
-<ul>
-	<li><code>1 &lt;= nums1.length, nums2.length &lt;= 1000</code></li>
-	<li><code>0 &lt;= nums1[i], nums2[i] &lt;= 1000</code></li>
-</ul>
+since the code will always iterate both array, the time complexity is O(n+m) n and m is the lengths of nums1 and nums2. 
 
-<p>&nbsp;</p>
-<p><strong>Follow up:</strong></p>
+it used 1 object and 1 array, and each is depends on the minimal lengths between the arrays. the worst case on the array is store all the elements from the objects so : O(min(n+m))
 
-<ul>
-	<li>What if the given array is already sorted? How would you optimize your algorithm?</li>
-	<li>What if <code>nums1</code>'s size is small compared to <code>nums2</code>'s size? Which algorithm is better?</li>
-	<li>What if elements of <code>nums2</code> are stored on disk, and the memory is limited such that you cannot load all elements into the memory at once?</li>
-</ul>
-</div>
+## Follow up Questions
+1. What if the given array is already sorted? How would you optimize your algorithm?
+
+if the arrays are sorted, i think the `two pointer tech` is more efficient because it doesnt require a hash map. the algorithm is to compare the elements from both arrays; if the values are the same store to the result array & if first array is smallest increment the first array index and vice versa.
+
+```js
+while (i < nums1.length && j < nums2.length) {
+ if (nums1[i] === nums2[j]) {
+     result.push(nums1[i]);
+     i++;
+     j++;
+ } else if (nums1[i] < nums2[j]) {
+     i++;
+ } else {
+     j++;
+ }
+}
+```
+This is because it leverages the smaller array for efficient lookups and minimizes the space used by the hash map, making it more suitable for handling larger arrays.
+
+2. What if nums1's size is small compared to nums2's size? Which algorithm is better?
+
+`hashmap tech` is generally better because it uses smaller array for quiuk lookups and keeps memory/space usage low, whichs more efficient in larger array
+
+## Lesson Learned
+- Comparing algorihm with different scenarios, i learned that the better solutions/algo is depends on the situation/scenarios. we just have to be critical and have a good understand about the trade-offs between different approaches

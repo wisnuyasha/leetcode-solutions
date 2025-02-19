@@ -1,54 +1,134 @@
-<h2><a href="https://leetcode.com/problems/roman-to-integer/">13. Roman to Integer</a></h2><h3>Easy</h3><hr><div><p>Roman numerals are represented by seven different symbols:&nbsp;<code>I</code>, <code>V</code>, <code>X</code>, <code>L</code>, <code>C</code>, <code>D</code> and <code>M</code>.</p>
+## Analysis
 
-<pre><strong>Symbol</strong>       <strong>Value</strong>
-I             1
-V             5
-X             10
-L             50
-C             100
-D             500
-M             1000</pre>
+My first attempt at this was bad and not clean code. I used map (because i used map A LOT but many say that a map is not good for this case and better for mutating the array) and kind of "brute force"-ing. I did this because I thought the substraction had too many cases; for example, what if "IC" "XD" "XC" etc? In the end, the rules of Roman numerals are not like that; it must be written from big to small numbers, except that six cases.
 
-<p>For example,&nbsp;<code>2</code> is written as <code>II</code>&nbsp;in Roman numeral, just two ones added together. <code>12</code> is written as&nbsp;<code>XII</code>, which is simply <code>X + II</code>. The number <code>27</code> is written as <code>XXVII</code>, which is <code>XX + V + II</code>.</p>
+The logic is I reversed the array and used conditional statements for the "six cases" to store the value manually in hashmap. This was also bad (storing manually), I should've just stored the value of the Roman numerals on object (hashmap) and accessed it with the index (Roman string)
 
-<p>Roman numerals are usually written largest to smallest from left to right. However, the numeral for four is not <code>IIII</code>. Instead, the number four is written as <code>IV</code>. Because the one is before the five we subtract it making four. The same principle applies to the number nine, which is written as <code>IX</code>. There are six instances where subtraction is used:</p>
+### Attempt Solution 1
+```js
+var romanToInt = function (s) {
+  let arr = s.split("");
+  arr.reverse();
+  let h = {};
 
-<ul>
-	<li><code>I</code> can be placed before <code>V</code> (5) and <code>X</code> (10) to make 4 and 9.&nbsp;</li>
-	<li><code>X</code> can be placed before <code>L</code> (50) and <code>C</code> (100) to make 40 and 90.&nbsp;</li>
-	<li><code>C</code> can be placed before <code>D</code> (500) and <code>M</code> (1000) to make 400 and 900.</li>
-</ul>
+  arr.map((s, i) => {
+    if (s === "I") {
+      if (h[i - 1] === 5) {
+        h[i] = 4;
+        h[i - 1] = 0;
+      } else if (h[i - 1] === 10) {
+        h[i] = 9;
+        h[i - 1] = 0;
+      } else {
+        h[i] = 1;
+      }
+    } else if (s === "V") {
+      h[i] = 5;
+    } else if (s === "X") {
+      if (h[i - 1] === 50) {
+        h[i] = 40;
+        h[i - 1] = 0;
+      } else if (h[i - 1] === 100) {
+        h[i] = 90;
+        h[i - 1] = 0;
+      } else {
+        h[i] = 10;
+      }
+    } else if (s === "L") {
+      h[i] = 50;
+    } else if (s === "C") {
+      if (h[i - 1] === 500) {
+        h[i] = 400;
+        h[i - 1] = 0;
+      } else if (h[i - 1] === 1000) {
+        h[i] = 900;
+        h[i - 1] = 0;
+      } else {
+        h[i] = 100;
+      }
+    } else if (s === "D") {
+      h[i] = 500;
+    } else {
+      h[i] = 1000;
+    }
+  });
 
-<p>Given a roman numeral, convert it to an integer.</p>
+  return Object.values(h).reduce((acc, cur) => acc + cur);
+};
+```
 
-<p>&nbsp;</p>
-<p><strong class="example">Example 1:</strong></p>
+After I realized the Roman numeral rules and all of my mistakes, I came up with different approach. I store the Roman numerals in a hashmap and applied 'if else' statements logic. Inside the loop, the logic is to check the previous index, If its one of the six case, just substract it with the previous value times 2. Why `*2` ? Because the previous value is already added, it must be substracted twice.
 
-<pre><strong>Input:</strong> s = "III"
-<strong>Output:</strong> 3
-<strong>Explanation:</strong> III = 3.
-</pre>
+### Attempt Solution 2
+```js
+var romanToInt = function (s) {
+  const h = {
+    I: 1,
+    V: 5,
+    X: 10,
+    L: 50,
+    C: 100,
+    D: 500,
+    M: 1000,
+  };
 
-<p><strong class="example">Example 2:</strong></p>
+  let val = 0;
 
-<pre><strong>Input:</strong> s = "LVIII"
-<strong>Output:</strong> 58
-<strong>Explanation:</strong> L = 50, V= 5, III = 3.
-</pre>
+  for (let i = 0; i < s.length; i++) {
+    if (i === 0 || h[s[i]] <= h[s[i - 1]]) {
+      val += h[s[i]];
+    } else {
+      val += h[s[i]] - h[s[i - 1]] * 2;
+    }
+  }
 
-<p><strong class="example">Example 3:</strong></p>
+  return val;
+};
+```
 
-<pre><strong>Input:</strong> s = "MCMXCIV"
-<strong>Output:</strong> 1994
-<strong>Explanation:</strong> M = 1000, CM = 900, XC = 90 and IV = 4.
-</pre>
 
-<p>&nbsp;</p>
-<p><strong>Constraints:</strong></p>
+But what if I just check the next item ? I realized that it can be done simply (not much math like before); if the next item is bigger, just substract the value. finally :
 
-<ul>
-	<li><code>1 &lt;= s.length &lt;= 15</code></li>
-	<li><code>s</code> contains only&nbsp;the characters <code>('I', 'V', 'X', 'L', 'C', 'D', 'M')</code>.</li>
-	<li>It is <strong>guaranteed</strong>&nbsp;that <code>s</code> is a valid roman numeral in the range <code>[1, 3999]</code>.</li>
-</ul>
-</div>
+### Attempt Solution 3
+```js
+var romanToInt = function (s) {
+  const h = {
+    I: 1,
+    V: 5,
+    X: 10,
+    L: 50,
+    C: 100,
+    D: 500,
+    M: 1000,
+  };
+
+  let val = 0;
+
+  for (let i = 0; i < s.length; i++) {
+    if (h[s[i]] < h[s[i + 1]]) {
+      val -= h[s[i]];
+    } else {
+      val += h[s[i]];
+    }
+  }
+
+  return val;
+};
+```
+Time complexity for this solution is `O(N)`, because it only need to iterate through one loops. Space complexity is `O(1)`, because the hashmap for Roman numerals is fixed-size and it not depends on the input.
+
+## Illustration & Dry Run
+
+![Roman to Integer](https://github.com/user-attachments/assets/b92ed68b-d4bc-40ec-b7f0-0090577166e3)
+
+
+## Lesson Learned
+
+1. Use FOR loops :
+Using `for` loops can make the code more readable and following the best practices
+
+2. Understand the problem carefully :
+Almost all of my mistakes and time wasted were because i didnt really understand the problem. With a better understanding, i would be able to solve the problem more efficiently.
+
+3. Optimize space usage : 
+In my first attempt, i used a hashmap to store values and an reversed array, and others. This resulted in a lot of unnecessary memory and reduced performance. Instead, try to store values in variables and think of solution that minimize space usage.

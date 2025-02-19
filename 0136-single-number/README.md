@@ -1,24 +1,39 @@
-<h2><a href="https://leetcode.com/problems/single-number/">136. Single Number</a></h2><h3>Easy</h3><hr><div><p>Given a <strong>non-empty</strong>&nbsp;array of integers <code>nums</code>, every element appears <em>twice</em> except for one. Find that single one.</p>
+## Analysis
 
-<p>You must&nbsp;implement a solution with a linear runtime complexity and use&nbsp;only constant&nbsp;extra space.</p>
+What the problem wants is :
+- Find the value that appears only once
+- Time complexity `O(N)` & Space complexity `O(1)`
 
-<p>&nbsp;</p>
-<p><strong class="example">Example 1:</strong></p>
-<pre><strong>Input:</strong> nums = [2,2,1]
-<strong>Output:</strong> 1
-</pre><p><strong class="example">Example 2:</strong></p>
-<pre><strong>Input:</strong> nums = [4,1,2,1,2]
-<strong>Output:</strong> 4
-</pre><p><strong class="example">Example 3:</strong></p>
-<pre><strong>Input:</strong> nums = [1]
-<strong>Output:</strong> 1
-</pre>
-<p>&nbsp;</p>
-<p><strong>Constraints:</strong></p>
+With the hint :
+> Think about the XOR (^) operator's property.
 
-<ul>
-	<li><code>1 &lt;= nums.length &lt;= 3 * 10<sup>4</sup></code></li>
-	<li><code>-3 * 10<sup>4</sup> &lt;= nums[i] &lt;= 3 * 10<sup>4</sup></code></li>
-	<li>Each element in the array appears twice except for one element which appears only once.</li>
-</ul>
-</div>
+I researched and learned about XOR, so its characteristics are :
+- A ^ B = B ^ A
+- A ^ 0 = A
+- A ^ A = 0
+
+So, all we need to do is iterate and XOR every element because it will return the single value since the duplicate (twin) values will cancel out to `0` and with `A ^ 0 = A`, the solution will be the remaining single value.
+
+For example, [4, 1, 2, 1, 2] becomes `4 ^ 1 ^ 2 ^ 1 ^ 2` -> `4 ^ 1 ^ 1 ^ 2 ^ 2`. Using the XOR characteristics `A ^ A = 0`, we get `4 ^ 0 ^ 0` = and the result is `4`.
+
+
+### Solution
+```js
+var singleNumber = function(nums) {
+    let res = 0
+    for(let i = 0; i < nums.length; i++) {
+        res ^= nums[i]
+    }
+    return res
+};
+```
+
+The time complexity is O(N) (linear time) and the space complexity is O(1) (only constant space).
+
+### Illustration & Dry Run
+![Single Number](https://github.com/user-attachments/assets/57c9f82a-5072-4651-8a57-d4a8099dcbeb)
+
+## Lesson Learned
+
+- XOR
+I learned that the XOR operation is powerful because it allows us to find a unique element in an array with linear time and constant space complexity. XOR's properties enable efficient solutions to problems involving pairs and duplicates.

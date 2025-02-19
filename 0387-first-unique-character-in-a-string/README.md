@@ -1,21 +1,36 @@
-<h2><a href="https://leetcode.com/problems/first-unique-character-in-a-string/">387. First Unique Character in a String</a></h2><h3>Easy</h3><hr><div><p>Given a string <code>s</code>, <em>find the first non-repeating character in it and return its index</em>. If it does not exist, return <code>-1</code>.</p>
+## Analysis
 
-<p>&nbsp;</p>
-<p><strong class="example">Example 1:</strong></p>
-<pre><strong>Input:</strong> s = "leetcode"
-<strong>Output:</strong> 0
-</pre><p><strong class="example">Example 2:</strong></p>
-<pre><strong>Input:</strong> s = "loveleetcode"
-<strong>Output:</strong> 2
-</pre><p><strong class="example">Example 3:</strong></p>
-<pre><strong>Input:</strong> s = "aabb"
-<strong>Output:</strong> -1
-</pre>
-<p>&nbsp;</p>
-<p><strong>Constraints:</strong></p>
+This problem requires :
+- find the first non-repeating char & return its index
+- if no such char exists, return `-1`
 
-<ul>
-	<li><code>1 &lt;= s.length &lt;= 10<sup>5</sup></code></li>
-	<li><code>s</code> consists of only lowercase English letters.</li>
-</ul>
-</div>
+## Thought process
+
+My approach is to :
+- first loop is to count the occurences of unique char
+- second loops is to search the character that occurs only once / `== 1`, if no such chars found, return `-1`
+
+### Solution
+
+```js
+var firstUniqChar = function(s) {
+    let h = {}
+    
+    for(let i = 0; i < s.length; i++) {
+        h[s[i]] = (h[s[i]] || 0) + 1
+    }
+    
+    for(let j = 0; j < s.length; j++) {
+        if(h[s[j]] == 1) {
+            return j
+        }
+    }
+ 
+    return -1
+};
+```
+
+With this approach, the time complexity is O(N) due to the two loops, and space complexity is O(K) where `k` is the unique char in the string.
+
+## Lesson Learned
+- Sometimes looping thru more than one loop is necessary. i was struggle to find the solution because i thought that it must be done in a single loops
