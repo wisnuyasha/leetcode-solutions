@@ -1,1 +1,1 @@
-its similar to [Hackerrank Slowest Key Press](../hackerrank-slowest-key-press/NOTES.md) :D
+its similar to [Hackerrank Slowest Key Press](../hackerrank-slowest-key-press/README.md) :D
