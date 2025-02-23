@@ -52,7 +52,9 @@ space complexity O(1) -> modifies the list in-place with a few pointers (constan
 
 ## Illustration & Dry Run
 
+![remove nth node from end](https://github.com/user-attachments/assets/3e1aaa56-d0e8-444f-b0ff-1c92f051dc95)
 
 ## Lesson Learned
-
-- A dummy node doesn't increase space complexity because it’s just one extra pointer (O(1)), doesn’t grow with input size, and modifies the list in place.
+- understanding edge cases (empty list, single-node list, deleting head) is crucial for writing linkedlist
+- dummy node doesn't increase space complexity because it’s just one extra pointer (O(1)), doesn’t grow with input size, and modifies the list in place.
+- returning `dummy.next` is best practice (clean code)
