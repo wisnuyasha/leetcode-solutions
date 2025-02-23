@@ -54,8 +54,11 @@ it runs O(N) -> O(N/2) + O(N/2) + O(N) = O(N).
 space complexity O(1) -> the algorithm is modified in-place without using extra spaces (only pointers).
 
 ## Illustration & Dry Run
+![Reorder List](https://github.com/user-attachments/assets/7d91aebe-1d7a-47d3-be87-b604e95dbef8)
 
 [slow and fast pointer technique](../0143-reorder-list/README.md#illustration--dry-run)
+
+
 [reverse iterative technique](../0206-reverse-linked-list/README.md#illustration--dry-run)
 
 ## Lesson Learned
