@@ -50,9 +50,8 @@ space complexity O(1) -> only integer and pointers that used.
 
 
 ## Illustration & Dry Run
-
+![add two numbers](https://github.com/user-attachments/assets/917ca92f-9fc6-4123-b1ce-c54eb1132134)
 
 
 ## Lesson Learned
-
 - handling edge cases properly makes the code cleaner and more readable.
