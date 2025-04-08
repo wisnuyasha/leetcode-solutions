@@ -69,7 +69,7 @@ space complexity O(log n) -> uses stack space for recursive calls
 
 
 ## Illustration & Dry Run
-
+![Binary Search](https://github.com/user-attachments/assets/d27e2e2f-5a72-4106-978b-a4e39db1418b)
 
 ## Lesson Learned
 - learned 2 main binary search approach (iterative & recursive)
