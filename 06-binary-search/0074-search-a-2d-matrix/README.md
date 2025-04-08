@@ -51,7 +51,7 @@ space complexity O(1) -> no extra spaces
 
 
 ## Illustration & Dry Run
-
+![Search a 2D Matrix](https://github.com/user-attachments/assets/957cbd0e-c938-4bae-bdf8-22295b70fc3e)
 
 ## Lesson Learned
 - learned how to convert 2D matrix search into 1D binary search using modulo and divide
