@@ -48,6 +48,7 @@ var search = function (nums, target) {
 
 ## Illustration & Dry Run
 
+![Search in Rotated Sorted Array](https://github.com/user-attachments/assets/4eeb457e-f68e-426c-863d-d8a865d45323)
 
 ## Lesson Learned
 - learned how to apply binary search on a rotated sorted array by detecting the sorted half and narrowing down based on the target's position.
