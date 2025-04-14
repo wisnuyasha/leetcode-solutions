@@ -10,7 +10,7 @@
  * @param {TreeNode} root
  * @return {TreeNode}
  */
-// DFS
+// DFS recusive
 var invertTree = function(root) {
     const curr = root
 
@@ -23,6 +23,24 @@ var invertTree = function(root) {
 
     swap(curr)
     return root
+};
+
+// DFS iterative
+var invertTree = function(root) {
+    if (!root) return null;
+
+    const stack = [root];
+
+    while (stack.length > 0) {
+        const node = stack.pop();
+
+        [node.left, node.right] = [node.right, node.left];
+
+        if (node.right) stack.push(node.right);
+        if (node.left) stack.push(node.left);
+    }
+
+    return root;
 };
 
 /// BFS
