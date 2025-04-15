@@ -37,7 +37,7 @@ const search = (root, val) => {
 };
 
 const remove = (root, val) => {
-  // kalo gaketemu
+  // if not found
   if (!root) return null;
 
   if (val < root.val) root.left = remove(root.left, val);
@@ -47,7 +47,7 @@ const remove = (root, val) => {
     if (!root.left && !root.right) return null;
 
     // case 2: 1 child
-    // kalo kiri gaada, langsung sambung node kanannya
+    // if left is null, connect to right child directly
     // 2       2
     //  \   =   \
     //   3  =    5
@@ -58,12 +58,12 @@ const remove = (root, val) => {
     if (!root.right) return root.left;
 
     // case 3: 2 child
-    //  -> ambil yang paling kecil dari kanan,
-    //  -> ganti value yang mau didelete dengan nomor paling kecil sebelumnya
-    //      -> dengan cara explore kanan dari node, dan terus kekiri sampe null
-    //  -> terus hapus aslinya dari bawah
+    //  -> take the smallest value from the right subtree
+    //  -> replace the value of the node to be deleted with that smallest value
+    //     -> by exploring right node, then keep going left until null
+    //  -> then delete the duplicate (successor) from the right subtree
 
-    // contoh ilustrasi
+    // illustration example :
     //          50
     //         /   \
     //       30     70
@@ -122,7 +122,7 @@ const getMin = (node) => {
   return node;
 };
 
-// create trees
+// create tree structure
 let root = null;
 root = insert(root, 50);
 
