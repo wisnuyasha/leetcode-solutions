@@ -113,3 +113,71 @@ Priority Queue is an **abstract data structure**.
 |-------------|-----------------------------------------------------------------------------|-----------------|
 | **Heapify** | Turns a regular array into a valid heap (max or min) using bottom-up sifts | `O(N)`          |
 | **HeapSort**| Sorting algorithm using heapify + repeated root removal and placement      | `O(N log N)`    |
+
+## MinHeap Class Code
+This code contains MinHeap class with insert and delete (remove root) operations
+
+```js
+
+class MinHeap {
+  constructor() {
+    this.heap = [];
+  }
+
+  insert(val) {
+    this.heap.push(val);
+    let i = this.heap.length - 1;
+
+    while (i > 0) {
+      const parent = Math.floor((i - 1) / 2);
+      // actively compare current index with the parents using above formulas (to get parent idx)
+      if (this.heap[i] < this.heap[parent]) {
+        [this.heap[i], this.heap[parent]] = [this.heap[parent], this.heap[i]];
+        i = parent;
+      } else break;
+    }
+  }
+
+  removeRoot() {
+    const last = this.heap.length - 1;
+    if (lastIdx < 0) return null;
+
+    // swap root & leaf, remove the root
+    [this.heap[0], this.heap[last]] = [this.heap[last], this.heap[0]];
+    const removed = this.heap.pop();
+
+    let i = 0;
+    const n = this.heap.length;
+
+    while (true) {
+      const left = i * 2 + 1,
+        right = i * 2 + 2;
+      let smallest = i;
+
+      // compare current index with decendants (if left/right is out of array, skip to break)
+      if (left < n && this.heap[left] < this.heap[smallest]) smallest = left;
+      if (right < n && this.heap[right] < this.heap[smallest]) smallest = right;
+
+      // if theres a smaller value than current index, swap to the decendants (child)
+      if (smallest !== i) {
+        [this.heap[i], this.heap[smallest]] = [
+          this.heap[smallest],
+          this.heap[i],
+        ];
+        i = smallest;
+      } else break;
+    }
+
+    return removed;
+  }
+
+  peek() {
+    this.heap[0];
+  }
+
+  size() {
+    this.heap.length;
+  }
+}
+
+```
