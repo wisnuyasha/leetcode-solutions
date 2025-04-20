@@ -125,9 +125,9 @@ class MaxHeap {
 
   siftUp(i) {
     while (i > 0) {
-      const p = Math.floor((i - 1) / 2);
+      const parent = Math.floor((i - 1) / 2);
       // actively compare current index with the parents using above formulas (to get parent idx)
-      if (this.heap[i] > this.heap[p]) {
+      if (this.heap[i] > this.heap[parent]) {
         [this.heap[i], this.heap[parent]] = [this.heap[parent], this.heap[i]];
         i = parent;
       } else break;
@@ -152,8 +152,6 @@ class MaxHeap {
         i = largest;
       } else break;
     }
-
-    return removed;
   }
 
   insert(val) {
