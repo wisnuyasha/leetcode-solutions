@@ -4,10 +4,10 @@
 **Medium**
 - [x] [Subsets](https://leetcode.com/problems/subsets/)
 - [x] [Combination Sum](https://leetcode.com/problems/combination-sum/)
-- [ ] [Combination Sum II](https://leetcode.com/problems/combination-sum-ii/)
-- [ ] [Permutations](https://leetcode.com/problems/permutations/)
-- [ ] [Subsets II](https://leetcode.com/problems/subsets-ii/)
-- [ ] [Word Search](https://leetcode.com/problems/word-search/)
+- [x] [Combination Sum II](https://leetcode.com/problems/combination-sum-ii/)
+- [x] [Permutations](https://leetcode.com/problems/permutations/)
+- [x] [Subsets II](https://leetcode.com/problems/subsets-ii/)
+- [x] [Word Search](https://leetcode.com/problems/word-search/)
 - [ ] [Palindrome Partitioning](https://leetcode.com/problems/palindrome-partitioning/)
 - [ ] [Letter Combinations of a Phone Number](https://leetcode.com/problems/letter-combinations-of-a-phone-number/)
 
@@ -18,28 +18,49 @@
 - **Backtracking as DFS**  
   backtracking is a depth-first search (DFS) where we explore possible solutions one by one, and "backtrack" once we determine the current path is invalid or complete. unlike brute-force, backtracking only explores **valid paths**, making it more efficient and structured.
 
-- **Subset vs Combination Search**  
-  subsets aim to explore all inclusion/exclusion combinations, combination Sum focuses on building numeric combinations that sum to a target using elements multiple times — thus needs careful control of index movement and pruning.
+- **Subset vs Combination vs Permutation**  
+    - combination: an unordered selection 
+    - permutation: all orderings, avoid repeats in path
+    - subset: explore all include/exclude options
 
 - **Path Management**  
   backtracking often uses a `path` array to store current decisions. each recursive call explores further decisions, and we `pop()` to undo the last decision after returning.
 
+- **Grid-based backtracking**
+  explore 2d boards in 4 directions with visited tracking, for a string/shape search on a grid
+
 ## Common Techniques & Patterns
 - **For-Loop Backtracking**  
   use a `for` loop from start to end to iterate through candidates, useful for exploring combinations or subsets without repetition. Advancing `start` ensures no duplicates and maintains order.  
-  Used in: [Subsets](0078-subsets/), [Combination Sum](0039-combination-sum/)
+  Used in: nearly all probs
+
+- **Rollback (undo state)** 
+  after recursion, always undo choices (example: `pop()`, `visited[x][y] = false`) to explore new paths
+  Used in: nearly all probs
 
 - **Early Stopping (Pruning)**  
   stop the recursion early if the current total exceeds the target to avoids unnecessary recursive calls.  
-  Used in: [Combination Sum](0039-combination-sum/)
+  Used in: nearly all probs
 
 - **Start Index to Avoid Duplicates**  
   pass a `start` index into recursion to only explore elements at or after the current position, preventing reversed duplicates like [3,2] and [2,3].  
-  Used in: [Subsets](0078-subsets/), [Combination Sum](0039-combination-sum/)
+  Used in: [Subsets](0078-subsets/), [Combination Sum](0039-combination-sum/), [Subsets II](0090-subsets-ii/)
 
 - **Allowing Reuse of Elements**  
   to allow using the same number multiple times (e.g. [2,2,3]), call `backtrack(i, ...)` instead of `backtrack(i + 1, ...)` (allow reuse element like [Subsets](0078-subsets/)).  
   Used in: [Combination Sum](0039-combination-sum/)
+
+- **Skip Duplicates in Sorted Input**
+  use `i > start && nums[i] === nums[i - 1]` after sorting to skip repeated values in one recursion level.
+  Used in: [Combination Sum II](0040-combination-sum-ii/), [Subsets II](0090-subsets-ii/)
+
+- **Visited check**
+  track used elements with visited[] or path.includes() to avoid repeating values.
+  Used in: [Permutations](0046-permutations/), [Word Search](0079-word-search/)
+
+- **Backtrack on 2D Board**
+  explore (up/down/left/right), mark visited with temporary `'#'`, then rollback.
+  Used in: [Word Search](0079-word-search/)
 
 ## reminder
 - **Snapshot Copying with [...path]**  
