@@ -1,6 +1,6 @@
 # leetcode-solutions
 
-This repository contains **LeetCode** problem solutions using **JavaScript**. Each solution includes:
+This repository contains **LeetCode** problem (neetcode 150/75 probs) solutions using **JavaScript**. Each solution includes:
 - **Code implementation** that has been tested
 - **Explanation of the problem-solving approach**
 - **Time & Space Complexity Analysis**
